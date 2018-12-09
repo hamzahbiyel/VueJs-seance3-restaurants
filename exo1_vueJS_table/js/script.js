@@ -2,14 +2,17 @@ window.onload = init;
 
 
 function init() {
+
+
+
   Vue.use(VueMaterial.default)
   new Vue({
         el: "#app",
         data: {
             restaurants: [],
-            name: "",
+            name : "", // I defined this attribut here to be acceessible from all components using $root
+            cuisine : "", // the same thing as name
             nameSearch: "",
-            cuisine:"",
             counter:0,
             page : 1,
             pagesize : 20,
@@ -59,73 +62,12 @@ function init() {
                           .then(function(res) {
                             that.restaurants = [];
                             that.restaurants= res.data ;
-                            console.log('hello')
                           });
                         })
                         .catch(function (err) {
                           console.log(err);
                         });
-                   }, 300),
-
-            supprimerRestaurant: function (index) {
-
-              let url = "http://localhost:8080/api/restaurants/"+index;
-              that = this;
-              // console.log(nouveauRestaurant)
-              fetch(url, {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                  },
-                  method: "DELETE"
-              })
-              .then(function(responseJSON) {
-                  responseJSON.json()
-                      .then(function(res) {
-                          // Maintenant res est un vrai objet JavaScript
-                          that.getDataFromServer(false)
-                      });
-                  })
-                  .catch(function (err) {
-                      console.log(err);
-              });
-              this.getDataFromServer(true)
-            },
-            ajouterRestaurant: function () {
-                // let nouveauRestaurant = {
-                //     name:this.name,
-                //     cuisine:this.cuisine
-                // }
-                let url = "http://localhost:8080/api/restaurants";
-                that = this;
-                // console.log(nouveauRestaurant)
-                fetch(url, {
-                  headers: {
-                      'Accept': 'application/json',
-                      'Content-Type': 'application/json'
-                    },
-                    method: "POST",
-                    body: JSON.stringify({nom : that.name,cuisine: that.cuisine})
-                })
-                .then(function(responseJSON) {
-                    responseJSON.json()
-                        .then(function(res) {
-                            // Maintenant res est un vrai objet JavaScript
-                            that.getDataFromServer(false)
-                            console.log("data send successfuly")
-                        });
-                    })
-                    .catch(function (err) {
-                        console.log(err);
-                });
-
-                this.getDataFromServer(true)
-                // on remet à zéro les champs
-                this.name = "";
-                this.cuisine = "";
-
-
-            },
+                   }, 900),
             modifierRestaurant: function (id) {
                 // let nouveauRestaurant = {
                 //     name:this.name,
@@ -161,40 +103,6 @@ function init() {
 
             }
             ,
-            selectRestaurant: function (id) {
-                // let nouveauRestaurant = {
-                //     name:this.name,
-                //     cuisine:this.cuisine
-                // }
-                let url = "http://localhost:8080/api/restaurants/"+id;
-                that = this;
-                // console.log(nouveauRestaurant)
-                fetch(url, {
-                  headers: {
-                      'Accept': 'application/json',
-                      'Content-Type': 'application/json'
-                    },
-                    method: "GET"
-                })
-                .then(function(responseJSON) {
-                    responseJSON.json()
-                        .then(function(res) {
-                            // Maintenant res est un vrai objet JavaScript
-                            that.name = res.restaurant.name
-                            that.cuisine = res.restaurant.cuisine
-                            console.log("data send successfuly")
-                        });
-                    })
-                    .catch(function (err) {
-                        console.log(err);
-                });
-
-                // on remet à zéro les champs
-                this.name = "";
-                this.cuisine = "";
-
-
-            },
             pageSuivante: function () {
               if (this.nbrPages > this.page) {
                 this.page++;

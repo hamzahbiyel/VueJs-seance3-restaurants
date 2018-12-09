@@ -12,6 +12,8 @@
       <!-- I placed vue-material before the script to be used -->
       <script src="https://unpkg.com/vue-material@beta"></script>
 
+<script src="js/ajoutRestaurant.component.js"></script>
+      <script src="js/restaurant.component.js"></script>
       <script src="js/script.js"></script>
       <script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
 
@@ -40,22 +42,7 @@
 
       <div id="app">
 
-  <div class="viewport">
-    <md-toolbar :md-elevation="1">
-         <span class="md-title">Ajout</span>
-       </md-toolbar>
-        <md-field>
-          <label>Name</label>
-          <md-input v-model="name"></md-input>
-          <md-icon>description</md-icon>
-      </md-field>
-      <md-field>
-        <label>Cuisine</label>
-        <md-input v-model="cuisine"></md-input>
-        <md-icon>description</md-icon>
-      </md-field>
-      <md-button class="md-raised md-primary" v-on:click="ajouterRestaurant">Ajouter</md-button>
-    </div>
+      <ajoutrestaurant></ajoutrestaurant>
     <div class="viewport">
         <md-toolbar :md-elevation="1">
           <span class="md-title">Recherche</span>
@@ -76,17 +63,10 @@
                   <md-table-head>Cuisine</md-table-head>
                   <md-table-head>Actions</md-table-head>
                 </md-table-row>
-                <md-table-row v-for="r,index in restaurants"
+                <restaurant v-for="r,index in restaurants"
+                v-bind:restaurant="r"
                  v-bind:style="{background:getColor(index)}"
-                 v-bind:class="[index == 4 ? 'bordureRouge' : '']">
-                  <md-table-cell>{{r.name}}</md-table-cell>
-                  <md-table-cell>{{r.cuisine}}</md-table-cell>
-                    <md-table-cell>
-                      <md-button class="md-dense md-raised md-accent" v-on:click="supprimerRestaurant(r._id)" >supprimer</md-button>
-                      <md-button class=" md-dense  md-raised md-primary" v-on:click="modifierRestaurant(r._id)" v-if="name.trim() != '' && cuisine.trim() != '' ">modifier</md-button>
-                      <md-button class=" md-dense  md-raised md-primary" v-on:click="selectRestaurant(r._id)">copy</md-button>
-                    </md-table-cell>
-                </md-table-row>
+                 v-bind:class="[index == 4 ? 'bordureRouge' : '']" > </restaurant>
               </md-table>
             </div>
             </template>

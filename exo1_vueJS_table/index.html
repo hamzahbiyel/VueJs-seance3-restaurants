@@ -1,89 +1,11 @@
-  <!DOCTYPE html>
-  <html>
-
+<!DOCTYPE html>
+<html lang="en">
   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width">
-      <!-- <script src="https://gstatic.com/firebasejs/4.0.0/firebase.js"></script> -->
-      <script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
-
-      <script src="lib/vue.min.js"></script>
-      <script src="lib/lodash.min.js"></script>
-      <!-- I placed vue-material before the script to be used -->
-      <script src="https://unpkg.com/vue-material@beta"></script>
-
-<script src="js/ajoutRestaurant.component.js"></script>
-      <script src="js/restaurant.component.js"></script>
-      <script src="js/script.js"></script>
-      <script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
-
-      <link rel="stylesheet" href="css/styles.css">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
-        <link rel="stylesheet" href="https://unpkg.com/vue-material@beta/dist/vue-material.min.css">
-        <link rel="stylesheet" href="https://unpkg.com/vue-material@beta/dist/theme/default.css">
-
-      <style lang="scss" scoped>
-      .viewport {
-        align-content: center;
-          width: 49%;
-          max-width: 100%;
-        display: inline-block;
-        vertical-align: top;
-        overflow: auto;
-        border: 2px solid rgba(#000, .12);
-      }
-    </style>
-
-
-      <title>Gestionnaire restaurants VueJS</title>
+    <meta charset="utf-8">
+    <title>Gestionnaire restaurants VueJS</title>
   </head>
-
   <body>
-
-      <div id="app">
-
-      <ajoutrestaurant></ajoutrestaurant>
-    <div class="viewport">
-        <md-toolbar :md-elevation="1">
-          <span class="md-title">Recherche</span>
-        </md-toolbar>
-          <md-field>
-          <label>Search</label>
-          <md-input v-model="nameSearch" v-on:input="chercherRestaurant">
-        </md-field>
-      </div>
-
-          <h1>Liste des restaurants : {{restaurants.length}}  </h1>
-
-          <template>
-            <div>
-              <md-table>
-                <md-table-row>
-                  <md-table-head>Name</md-table-head>
-                  <md-table-head>Cuisine</md-table-head>
-                  <md-table-head>Actions</md-table-head>
-                </md-table-row>
-                <restaurant v-for="r,index in restaurants"
-                v-bind:restaurant="r"
-                 v-bind:style="{background:getColor(index)}"
-                 v-bind:class="[index == 4 ? 'bordureRouge' : '']" > </restaurant>
-              </md-table>
-            </div>
-            </template>
-        <div style="text-align: center;">
-                <button v-on:click="firstPage" ><<</button>
-                <button v-on:click="pagePrecedente" v-if="page > 1 "><</button>
-                <span v-if="nbrPages > 6" >
-                  <span v-if="page > 3" > ... </span>
-                </span>
-                <a href="#"  v-on:click="getPage(n)" v-for="n in [page,page + 1 ,page + 2]">{{n}},</a>
-                <span v-if="nbrPages > 6" >
-                  <span v-if="page < nbrPages - 3 " > ... </span>
-                </span>
-                <button v-on:click="pageSuivante" v-if="nbrPages > page ">></button>
-                <button v-on:click="lastPage">>></button>
-          </div>
-          </div>
-      </div>
+    <div id="app"></div>
+    <script src="/dist/build.js"></script>
   </body>
-  </html>
+</html>

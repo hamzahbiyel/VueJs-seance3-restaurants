@@ -1,10 +1,14 @@
 <template>
 <div>
 <md-button class=" md-dense  md-raised md-primary" v-on:click="gotoHome()" >Home</md-button>
+      <div class="item">
+<img :src="restoImage" />
+</div>
 <md-empty-state
       :md-label="restaurant.name"
       md-description="here is the list of our meals">
       </md-empty-state>
+
 
       <div class="md-layout">
     <div class="md-layout-item">
@@ -142,13 +146,19 @@ import Map from "./map.vue";
         entree : [{name : 'entree1',prix:10},{name : 'entree2',prix:7},{name : 'entree3',prix:76},{name : 'entree4',prix:27}],
         plat : [{name : 'plat1',prix:11},{name:'plat2',prix:5},{name:'plat3',prix:5},{name:'plat4',prix:5}],
         dessert : [{name : 'dessert1',prix:11},{name:'dessert2',prix:5},{name:'dessert3',prix:15},{name:'dessert4',prix:25}]
-      }
+      },
+      images : ["1.jpg","2.jpg","3.jpg","4.jpg"]
 
         }
 
     },
     components: {
 
+  },
+  computed:  {
+    restoImage () {
+      return require('./assets/' + this.getRandom(this.images,1))
+    }
   },
     mounted: function() {
     this.menu.entree = this.getRandom(this.menuGeneral.entree, 2)
@@ -189,8 +199,12 @@ import Map from "./map.vue";
     }
   },
   addtocart(m) {
+    if(m.qte == undefined || m.qte < 1 ){
+      alert('qte not valid value')
+    } else {
     this.panier.push(m)
     this.total = this.total + (m.prix * m.qte)
+    }
   },
   getRandom(arr, n) {
       var result = new Array(n),
@@ -210,4 +224,15 @@ import Map from "./map.vue";
 </script>
 
 <style scoped>
+
+img {
+    max-width: auto;
+    height: 200px;
+}
+
+.item {
+margin-left: auto;
+margin-right: auto;
+width: 30%;
+}
 </style>

@@ -8,6 +8,7 @@
       </md-toolbar>
         <md-field>
         <label>Search</label>
+        <md-input v-model="nameSearch" v-on:input="chercherRestaurant" />
 
       </md-field>
     </div>
@@ -48,6 +49,8 @@
 <script>
 import restaurant from './restaurant.vue';
 import ajoutrestaurant from './ajoutrestaurant.vue'
+// Load the full build.
+var _ = require('lodash');
 
 export default {
   name: 'home',
@@ -55,7 +58,7 @@ export default {
           restaurants : [],
           name : "", // I defined this attribut here to be acceessible from all components using $root
           cuisine : "", // the same thing as name
-          nameSearch: "",
+          nameSearch : "",
           counter:0,
           page : 1,
           pagesize : 20,
@@ -73,7 +76,23 @@ export default {
           this.getDataFromServer(true);
         },
         methods: {
-        
+        chercherRestaurant : _.debounce(function() {
+                    let url = "http://localhost:8080/api/restaurants?name="+this._data.nameSearch;
+                    let that = this
+
+                    fetch(url)
+                      .then(function(responseJSON) {
+                          responseJSON.json()
+                          .then(function(res) {
+                            that.restaurants = [];
+                            that.restaurants= res.data ;
+                          });
+                        })
+                        .catch(function (err) {
+                          console.log(err);
+                        });
+                   }, 900),
+
         modifierRestaurant: function (id) {
             let url = "http://localhost:8080/api/restaurants/"+id;
 

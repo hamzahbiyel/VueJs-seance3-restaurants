@@ -130,7 +130,6 @@
 </template>
 
 <script lang="js">
-import Map from "./map.vue";
 
 
   export default  {
@@ -143,9 +142,9 @@ import Map from "./map.vue";
       total : 0,
       menu : {},
       menuGeneral : {
-        entree : [{name : 'entree1',prix:10},{name : 'entree2',prix:7},{name : 'entree3',prix:76},{name : 'entree4',prix:27}],
-        plat : [{name : 'plat1',prix:11},{name:'plat2',prix:5},{name:'plat3',prix:5},{name:'plat4',prix:5}],
-        dessert : [{name : 'dessert1',prix:11},{name:'dessert2',prix:5},{name:'dessert3',prix:15},{name:'dessert4',prix:25}]
+        entree : [{name : 'entree1',prix:10},{name : 'entree2',prix:7},{name : 'entree3',prix:76},{name : 'entree4',prix:27},{name : 'entree5',prix:27},{name : 'entree6',prix:27}],
+        plat : [{name : 'plat1',prix:11},{name:'plat2',prix:5},{name:'plat3',prix:5},{name:'plat4',prix:5},{name:'plat5',prix:6},{name:'plat6',prix:7},{name:'plat7',prix:8},{name:'plat8',prix:18}],
+        dessert : [{name : 'dessert1',prix:11},{name:'dessert2',prix:5},{name:'dessert3',prix:150},{name:'dessert4',prix:121},{name:'dessert5',prix:250},{name:'dessert6',prix:125},{name:'dessert7',prix:105}]
       },
       images : ["1.jpg","2.jpg","3.jpg","4.jpg"]
 
@@ -161,9 +160,9 @@ import Map from "./map.vue";
     }
   },
     mounted: function() {
-    this.menu.entree = this.getRandom(this.menuGeneral.entree, 2)
-    this.menu.plat = this.getRandom(this.menuGeneral.plat, 2)
-    this.menu.dessert = this.getRandom(this.menuGeneral.dessert, 2)
+    this.menu.entree = this.getRandom(this.menuGeneral.entree, 4)
+    this.menu.plat = this.getRandom(this.menuGeneral.plat, 4)
+    this.menu.dessert = this.getRandom(this.menuGeneral.dessert, 4)
     let url = "http://localhost:8080/api/restaurants/"+this.$route.params.id;
 
     let that = this;

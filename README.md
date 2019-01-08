@@ -1,9 +1,41 @@
-# VueJs-seance3-restaurants
+# Mini projet Hamza Hbiyel
 
-Proposer une application VueJS qui permet d'insérer, supprimer, modifier et rechercher des restaurants, en utilisant les bonnes pratiques REST (toutes les requêtes AJAX devront être réalisées à l'aide de l'API fetch, avec des GET/PUT/POST/DELETE)
- 
-Vous implémenterez la pagination (page précédente / suivante) mais aussi, première et dernière page. Vous veillerez à ce qu'on ne puisse pas aller au-delà de la dernière page ou avant la première.
- 
-La recherche sera incrémentale, sur le nom. Un plus pour ceux qui arrivent à utiliser la fonction _.debounce de lodash pour ne lancer une requête que lorsqu'on a arrêter de taper des caractères pendant plus de 300ms.
- 
-Bonus pour ceux qui vont regarder le site https://risingstars.js.org et réussir à utiliser une bibliothèque de composants graphiques pour VueJS (par ex: Vue Material, mais les autres sont très bien aussi).
+> A Vue.js project
+
+## Build Setup
+
+``` bash
+# get in exo1-vueJS_table
+cd exo1-vueJS_table
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev -- --port 3000
+
+```
+
+## to know
+
+the server has not been modified
+the project contains two routes one for the Home and the other one for restaurant details
+
+``` js
+
+const routes = [
+  {path: '/',name: 'home', component: Home},
+  {path: '/resto/:id', name : 'detail', component: AppRestoDetail} ];
+
+```
+
+I used vueMaterial but it seems that is not working as expected and it was working in the project previous version.
+
+I wanted to use vuematerial pagination but it's not yet implemented.
+
+per every restaurant you will find 4 buttons :
+  COPY : this is used to copy information of current restaurant in the name and cuisine global inputs.
+  DELETE : used to delete restaurant.
+  UPDATE : update name and cuisine using global inputs.
+  DETAILS : call the details page of current restaurant.
+
+for the details page, you will notice that I inserted the bill at the end of the page.
